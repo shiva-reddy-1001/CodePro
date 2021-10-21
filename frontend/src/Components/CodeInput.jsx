@@ -11,13 +11,14 @@ const CodeInput = (props) => {
     return (
         <div>
            <CodeMirror
-            value='<h1>I ♥ react-codemirror2</h1>'
+            value={props.value}
             options={{
                 mode: props.language,
                 theme: 'material',
                 lineNumbers: true
             }}
             onChange={(editor, data, value) => {
+                props.save(value);
             }}
             />
         </div>

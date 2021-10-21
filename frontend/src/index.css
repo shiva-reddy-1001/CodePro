@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+iframe {
+  border : none;
+}
+
+.output{
+  height: 100%;
+  
+}
+
+.FullScreenToggle{
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  float: right;
+}
