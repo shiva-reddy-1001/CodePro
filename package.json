@@ -1,0 +1,22 @@
+{
+  "name": "codepro",
+  "version": "1.0.0",
+  "description": "IWP assignment - Frontend Code editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiva-reddy-1001/CodePro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shiva-reddy-1001/CodePro/issues"
+  },
+  "homepage": "https://github.com/shiva-reddy-1001/CodePro#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
