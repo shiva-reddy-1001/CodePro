@@ -1,11 +1,10 @@
-import './App.css';
 import CodeInput from './Components/CodeInput'
 import { useState,useEffect } from 'react';
 import Output from './Components/Output';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
-function App() {
+const App = () => {
   const [jsCode, setjsCode] = useState("");
   const [htmlCode, sethtmlCode] = useState("");
   const [cssCode, setcssCode] = useState("");
@@ -27,24 +26,6 @@ function App() {
     return () => clearTimeout(timeout)
   }, [htmlCode, cssCode, jsCode])
 
-  const updateJSCode = (value) => {
-    setjsCode(value);
-    updateTotalCode();
-  }
-
-  const updateHTMLCode = (value) => {
-    sethtmlCode(value);
-    updateTotalCode();
-  }
-
-  const updateCSSCode = (value) => {
-    setcssCode(value);
-    updateTotalCode();
-  }
-
-  const updateTotalCode = () => {
-    settotalCode(htmlCode+ "<style>" + cssCode + "</style>"+"<script>" + jsCode + "</script>")
-  }
 
   return (
     <div className="App">
@@ -55,9 +36,9 @@ function App() {
           <Button  className="codeMode" onClick={() => {setcodeMode(0)}}variant="outlined"> HTML</Button>
           <Button  className="codeMode" onClick={() => {setcodeMode(1)}}variant="outlined"> CSS</Button>
           <Button  className="codeMode" onClick={() => {setcodeMode(2)}}variant="outlined"> JS</Button>
-          {codeMode===0 && <CodeInput language="xml" value={htmlCode} save={updateHTMLCode}></CodeInput>}
-          {codeMode===1 && <CodeInput language="css"  value={cssCode} save={updateCSSCode}></CodeInput> }
-          {codeMode===2 && <CodeInput language="javascript" value={jsCode} save={updateJSCode}></CodeInput> }
+          {codeMode===0 && <CodeInput language="xml" value={htmlCode} save={sethtmlCode}></CodeInput>}
+          {codeMode===1 && <CodeInput language="css"  value={cssCode} save={setcssCode}></CodeInput> }
+          {codeMode===2 && <CodeInput language="javascript" value={jsCode} save={setjsCode}></CodeInput> }
           </Grid>
         
       }

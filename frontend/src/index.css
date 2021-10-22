@@ -25,6 +25,7 @@ iframe {
   top: 5px;
   right: 5px;
   float: right;
+  margin-left: 5px !important;
 }
 
 .CodeMirror {
@@ -34,7 +35,7 @@ iframe {
 .codeMode {
   top: 5px;
   left:10px;
-  margin-left: 5px;
+  margin-left: 5px !important;
 }
 
 .codeInput{
