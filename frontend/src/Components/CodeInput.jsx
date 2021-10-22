@@ -9,13 +9,16 @@ require('codemirror/mode/javascript/javascript.js');
 
 const CodeInput = (props) => {
     return (
-        <div>
+        <div className="codeInput">
            <CodeMirror
+            classname="CodeMirror"
             value={props.value}
             options={{
+                lineWrapping: true,
+                lint : true,
                 mode: props.language,
                 theme: 'material',
-                lineNumbers: true
+                lineNumbers: true,
             }}
             onChange={(editor, data, value) => {
                 props.save(value);
