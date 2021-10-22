@@ -41,3 +41,29 @@ iframe {
   height: 100%;
   margin-top:10px;
 }
+
+.LoginBox{
+  display: flex;
+  justify-content: center;
+}
+
+/* .LoginGrid{
+  height: 100vh;
+} */
+
+footer{
+  background-color: red;
+  color: aliceblue;
+  padding: 10px;
+  text-align: center;
+}
+
+p a {
+  text-decoration: none;
+  color:cadetblue;
+}
+
+.cardActions{
+  display: flex;
+  justify-content: space-between;
+}
