@@ -5,15 +5,21 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-const LoginBox = () => {
+const RegisterBox = () => {
     return (
       <div className="LoginBox">
         <Card >
             <CardContent>
-              <h3>Welcome Back! 😎</h3>
+              <h3>Join Us! 😎</h3>
+              <TextField label="Email"/>
+              <br/><br/>
+              <TextField label="Full Name"/>
+              <br/><br/>
               <TextField label="Username"/>
               <br/><br/>
               <TextField label="Password" type="password" />
+              <br/><br/>
+              <TextField label="Check Password" type="password" />
               <br/><br/>
               <Button variant="outlined">Login</Button>
               <p>New User? <a href="www.google.com"><b>Register</b></a></p>
@@ -23,4 +29,4 @@ const LoginBox = () => {
       );
 }
 
-export default LoginBox;
+export default RegisterBox;
