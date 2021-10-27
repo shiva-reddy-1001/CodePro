@@ -5,24 +5,24 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-const RegisterBox = () => {
+const RegisterBox = (props) => {
     return (
-      <div className="LoginBox">
+      <div className="RegisterBox">
         <Card >
             <CardContent>
               <h3>Join Us! 😎</h3>
               <TextField label="Email"/>
               <br/><br/>
               <TextField label="Full Name"/>
-              <br/><br/>
+              &emsp;
               <TextField label="Username"/>
               <br/><br/>
               <TextField label="Password" type="password" />
-              <br/><br/>
+              &emsp;
               <TextField label="Check Password" type="password" />
               <br/><br/>
-              <Button variant="outlined">Login</Button>
-              <p>New User? <a href="www.google.com"><b>Register</b></a></p>
+              <Button variant="outlined">Register</Button>
+              <p>Existing User? <a onClick={props.login}><b>Login</b></a></p>
               </CardContent>
         </Card>
         </div>

@@ -56,6 +56,17 @@ iframe {
   color: #0288d1 !important;
 }
 
+.RegisterBox{
+  padding: 10% 10%;
+  width: 600px;
+  height: 350px;
+  color: #EEEEEE;
+}
+
+.RegisterBox h3{
+  color: #0288d1 !important;
+}
+
 button {
   border: 1px solid #0288d1 !important;
   color: #0288d1 !important;

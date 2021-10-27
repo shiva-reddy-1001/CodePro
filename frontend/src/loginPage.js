@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./index.css"
 import Grid from '@mui/material/Grid';
 import Content from './Components/Content'
@@ -9,6 +9,12 @@ import RegisterBox from "./Components/RegisterBox";
 
 
 const LoginPage = () => {
+
+    const [loginMode,setLoginMode] = useState(false)
+    const switchMode = () => {
+        setLoginMode(!loginMode);
+        console.log(loginMode);
+    }
     return (
         <div>
         <NavBar></NavBar>
@@ -18,8 +24,8 @@ const LoginPage = () => {
                     <Content></Content>
                 </Grid>
                 <Grid item xs={12} md={6} lg={6}>
-                    <LoginBox />
-                    {/* <RegisterBox></RegisterBox> */}
+                    {!loginMode ? <LoginBox register={switchMode}/> :
+                     <RegisterBox login={switchMode}></RegisterBox> }
                 </Grid>
             </Grid>
         </div>

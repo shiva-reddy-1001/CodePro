@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-const LoginBox = () => {
+const LoginBox = (props) => {
     return (
       <div className="LoginBox">
         <Card >
@@ -16,7 +16,7 @@ const LoginBox = () => {
               <TextField label="Password" type="password" />
               <br/><br/>
               <Button variant="outlined">Login</Button>
-              <p>New User? <a href="www.google.com"><b>Register</b></a></p>
+              <p>New User? <a onClick={props.register}><b>Register</b></a></p>
               </CardContent>
         </Card>
         </div>
