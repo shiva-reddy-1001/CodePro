@@ -1,6 +1,5 @@
 import React from "react";
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -12,11 +11,13 @@ const RegisterBox = (props) => {
             <CardContent>
               <h3>Join Us! 😎</h3>
               <TextField label="Email"/>
-              <br/><br/>
-              <TextField label="Full Name"/>
               &emsp;
               <TextField label="Username"/>
               <br/><br/>
+              <TextField label="First Name"/>
+              &emsp;
+              <TextField label="Last Name"/>
+              <br/><br/>  
               <TextField label="Password" type="password" />
               &emsp;
               <TextField label="Check Password" type="password" />
