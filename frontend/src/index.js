@@ -5,6 +5,6 @@ import LoginPage from './loginPage'
 import App from './App'
 import HomeScreen from './HomeScreen'
 ReactDOM.render(
-    <App />,
+    <HomeScreen />,
   document.getElementById('root')
 );

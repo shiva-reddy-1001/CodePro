@@ -6,7 +6,8 @@ const projectSchema = {
     html:String,
     css:String,
     js:String,
-    private:Boolean
+    private:Boolean,
+    name:String,
   };
 
 const project = mongoose.model("project", projectSchema);

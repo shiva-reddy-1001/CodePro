@@ -7,7 +7,6 @@ const ProjectCard = (props) => {
     <html>
       <body>${props.htmlCode}</body>
       <style>${props.cssCode}</style>
-      <script>${props.jsCode}</script>
     </html>
   `;
     return (
@@ -20,16 +19,11 @@ const ProjectCard = (props) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {props.name}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button className="codeMode" size="small">Open</Button>
       </CardActions>
     </Card>
     );

@@ -5,7 +5,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  /* background-color: #0288d1;  */
+  background-color: #0288d1; 
   color: #EEEEEE;
 }
 
@@ -69,7 +69,8 @@ iframe {
 
 button {
   border: 1px solid #0288d1 !important;
-  color: #0288d1 !important;
+  color: #EEEEEE !important;
+  background-color: #0288d1 !important;
 }
 
 footer{
@@ -101,4 +102,10 @@ p a {
   padding:10% 10%;
   height:64vh;
   font-size:24px;
+}
+
+.DisplayCards {
+  margin:auto;
+  width: 60%;
+  margin-top:10%;
 }

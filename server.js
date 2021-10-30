@@ -23,7 +23,8 @@ mongoose.connect(process.env.MONGO_URI, {
 
 const user =  require('./Models/User.js')
 const project =  require('./Models/Project.js')
-
+const blah = new project({'html':'<h1>Hello</h1>','name':'test'})
+blah.save()
 
 app.get('/', (req, res) => {
     res.render('index');
