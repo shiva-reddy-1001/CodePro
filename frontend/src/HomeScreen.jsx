@@ -3,14 +3,17 @@ import { useState,useEffect } from 'react';
 import Output from './Components/Output';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import ProjectCard from './Components/ProjectCard';
 
 const HomeScreen = () => {
-    useEffect(()=>{
-        // fetch all codepens
-    })
+    
+
     return (
-        <div>
-            
+        
+        <div className="DisplayCards">
+            <ProjectCard htmlCode='<h1>Hello Shiva</h1>'></ProjectCard>
         </div>
     );
 }
+
+export default HomeScreen;
