@@ -10,7 +10,6 @@ const LoginBox = (props) => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
-    event.preventDefauit();
 
     const params = JSON.stringify({
       "username": username,
@@ -18,7 +17,7 @@ const LoginBox = (props) => {
     });
 
     axios
-      .post("/api/login", params, {
+      .post("http://localhost:5000/api/login", params, {
         "headers": {
           "content-type": "application/json",
         },})
