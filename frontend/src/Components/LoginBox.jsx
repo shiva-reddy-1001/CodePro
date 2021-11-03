@@ -10,20 +10,23 @@ const LoginBox = (props) => {
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
-
+    event.preventDefault();
     const params = JSON.stringify({
       "username": username,
       "password": password
     });
-
+    
     axios
       .post("http://localhost:5000/api/login", params, {
         "headers": {
           "content-type": "application/json",
         },})
       .then(res => {
+        console.log("simp");
         localStorage.setItem("username", res.data.username);  
         localStorage.setItem("token", res.data.token);
+        console.log(localStorage.getItem("username"))
+        console.log(localStorage.getItem("token"))
       })
       .catch(err => console.error(err));
   };

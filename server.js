@@ -87,7 +87,7 @@ app.post('/api/login', (req, res) => {
   const userName = req.body.userName;
   const password = req.body.password;
 
-  user.findOne({ email: userName }, function (err, foundUser) {
+  user.findOne({ username: userName }, function (err, foundUser) {
     if(err) {
       console.log(err);
     } else {
@@ -95,6 +95,7 @@ app.post('/api/login', (req, res) => {
         bcrypt.compare(password, foundUser.password, function (err, result) {
           if (result) {
             const token = generateToken({ id: result.username });
+            console.log(token);
             res.send({ username: result.username, token: token });
             // if (compareHash(password, result.password)) {
             //   const token = generateToken({ id: result.username });
