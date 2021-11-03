@@ -1,13 +1,34 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-
+import axios from 'axios'
 const LoginBox = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefauit();
+
+    const params = JSON.stringify({
+      "username": username,
+      "password": password
+    });
+
+    axios
+      .post("/api/login", params, {
+        "headers": {
+          "content-type": "application/json",
+        },})
+      .then(res => {
+        localStorage.setItem("username", res.data.username);  
+        localStorage.setItem("token", res.data.token);
+      })
+      .catch(err => console.error(err));
+  };
+
     return (
       <div className="LoginBox">
         <Card>
@@ -21,7 +42,7 @@ const LoginBox = (props) => {
                 onChange={e => setPassword(e.target.value)}
               />
               <br/><br/>
-              <Button variant="outlined">Login</Button>
+              <Button variant="outlined" onClick={handleSubmit}>Login</Button>
               <p>New User? <a onClick={props.register}><b>Register</b></a></p>
               </CardContent>
         </Card>
