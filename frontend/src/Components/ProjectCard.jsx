@@ -1,5 +1,7 @@
 
 import {Card, CardMedia, CardContent,CardActions, Typography, Button} from '@mui/material'
+import {Link} from 'react-router-dom'
+
 
 const ProjectCard = (props) => {
 
@@ -23,7 +25,10 @@ const ProjectCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button className="codeMode" size="small">Open</Button>
+         
+        <Button className="codeMode" size="small">
+        <Link to={`/projects/${props.id}` }>Open</Link>
+        </Button>
       </CardActions>
     </Card>
     );

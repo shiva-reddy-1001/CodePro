@@ -21,6 +21,7 @@ iframe {
 .output{
   height: 100vh;
   overflow-y: visible;
+  background-color: #FFFFFF !important;
 }
 
 .FullScreenToggle{

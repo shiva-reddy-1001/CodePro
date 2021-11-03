@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import LoginPage from './loginPage'
-import App from './App'
-import HomeScreen from './HomeScreen'
+import Routes from './Routes'
+
+
 ReactDOM.render(
-    <HomeScreen />,
+    <Routes>
+    </Routes>,
   document.getElementById('root')
 );
