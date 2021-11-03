@@ -28,14 +28,15 @@ const blah = new project({ 'html': '<h1>Hello</h1>', 'name': 'test' })
 blah.save()
 
 const generateToken = (tokenData) => {
-  const token = jwt.sign({ data: tokenData }, envConfig.JWT_SECRET_KEY, {
-    expiresIn: tokenConfig.TOKEN_LIFE,
+  const token = jwt.sign({ data: tokenData }, process.env.JWT_SECRET_KEY, {
+    expiresIn: "1h",
   });
+  console.log(token);
   return token;
 };
 const verifyToken = (token) => {
   try {
-    const decodedData = jwt.verify(token, envConfig.JWT_SECRET_KEY);
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET_KEY);
     return decodedData;
   } catch (err) {
     if (err.name === "TokenExpiredError") {
@@ -84,7 +85,7 @@ app.post('/api/register', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
-  const userName = req.body.userName;
+  const userName = req.body.username;
   const password = req.body.password;
 
   user.findOne({ username: userName }, function (err, foundUser) {
@@ -94,16 +95,9 @@ app.post('/api/login', (req, res) => {
       if (foundUser) {
         bcrypt.compare(password, foundUser.password, function (err, result) {
           if (result) {
-            const token = generateToken({ id: result.username });
+            const token = generateToken({ id: userName });
             console.log(token);
-            res.send({ username: result.username, token: token });
-            // if (compareHash(password, result.password)) {
-            //   const token = generateToken({ id: result.username });
-            //   res.send({ username: result.username, token: token });
-            // }
-            // else {
-            //   res.status(401);
-            // }
+            res.send({ username: userName, token: token });
           }
           else {
             res.status(401);
