@@ -14,7 +14,6 @@ app.use(cors());
 const saltRounds = 10;
 
 
-
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -24,14 +23,12 @@ mongoose.connect(process.env.MONGO_URI, {
 const user = require('./Models/User.js')
 const project = require('./Models/Project.js');
 const { strictEqual } = require('assert');
-const blah = new project({ 'html': '<h1>Hello</h1>', 'name': 'test' })
-blah.save()
+
 
 const generateToken = (tokenData) => {
   const token = jwt.sign({ data: tokenData }, process.env.JWT_SECRET_KEY, {
     expiresIn: "1h",
   });
-  console.log(token);
   return token;
 };
 const verifyToken = (token) => {
@@ -109,6 +106,13 @@ app.post('/api/login', (req, res) => {
       }
     }
   })
+})
+
+app.post('/api/userValidation',(req,res) => {
+  const details = verifyToken(req.body.token);
+  if(details){
+    res.send(true);
+  }
 })
 
   app.listen(port, () => {

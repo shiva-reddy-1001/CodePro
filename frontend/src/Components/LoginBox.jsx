@@ -5,6 +5,30 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios'
 const LoginBox = (props) => {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userName = localStorage.getItem("username");
+    if(token && userName){
+      const params = JSON.stringify({
+        "username": userName,
+        "token": token
+      });
+      axios
+        .post("http://localhost:5000/api/userValidation", params, {
+          "headers": {
+            "content-type": "application/json",
+          },
+        })
+        .then(res => {
+          if(res.data===true){
+            console.log("trueeeeee");
+            window.location.href = 'http://localhost:3000/#/'+userName;
+          }
+        })
+    }
+    
+  })
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,11 +45,8 @@ const LoginBox = (props) => {
           "content-type": "application/json",
         },})
       .then(res => {
-        console.log("simp");
         localStorage.setItem("username", res.data.username);  
         localStorage.setItem("token", res.data.token);
-        console.log(localStorage.getItem("username"))
-        console.log(localStorage.getItem("token"))
       })
       .catch(err => console.error(err));
   };
