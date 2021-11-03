@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const path = require("path");
 app.use(express.json({ extended: false }))
 app.use(express.static(path.join(__dirname, 'frontend\\build')));
+app.use(cors());
 const saltRounds = 10;
 
 
@@ -17,8 +18,6 @@ const saltRounds = 10;
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
 });
 
 
@@ -68,7 +67,7 @@ app.get('/api/getAllProjects/:username', (req, res) => {
 app.post('/api/register', (req, res) => {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
     const newUser = new user({
-      username: req.body.userName,
+      username: req.body.username,
       firstname: req.body.firstName,
       lastname: req.body.lastName,
       email: req.body.email,
