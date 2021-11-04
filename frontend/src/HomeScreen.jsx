@@ -29,7 +29,7 @@ const HomeScreen = () => {
             {
               projects.map((project) => {
               return (
-                <Grid item xs={12} lg={4} md={6}>
+                <Grid key={project._id} item xs={12} lg={4} md={6}>
                     <ProjectCard htmlCode={project.html} cssCode={project.css} id={project._id.toString()}></ProjectCard>
                 </Grid>
               );

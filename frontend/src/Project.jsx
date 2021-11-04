@@ -12,19 +12,19 @@ const Project = (props) => {
   const [totalCode, settotalCode] = useState("");
   const [fullScreenView, setfullScreenView] = useState(false);
   const [codeMode, setcodeMode] = useState(0);
-
+  let token;
   const {id} = props.match.params;
-  
+
+  axios.get('http://localhost:5000/api/getProject/'+id,)
+      .then((res) => {
+        setjsCode(res.data.js);
+        sethtmlCode(res.data.html);
+        setcssCode(res.data.css);
+      })
+      .catch(err => console.error(err))
+
   useEffect(() => {
-    
-    axios.get('http://localhost:5000/api/getProject/'+id,)
-    .then((res) => {
-      setjsCode(res.data.js);
-      sethtmlCode(res.data.html);
-      setcssCode(res.data.css);
-      console.log(res.data);
-    })
-    .catch(err => console.error(err))
+    token = localStorage.getItem("token");
     const timeout = setTimeout(() => {
       settotalCode(`
         <html>
@@ -38,7 +38,23 @@ const Project = (props) => {
     return () => clearTimeout(timeout)
   }, [htmlCode, cssCode, jsCode])
 
-
+  const handleSave = () => {
+    const params = JSON.stringify({
+      html:htmlCode,
+      css:cssCode,
+      js:jsCode,
+      id: id
+    });
+    axios
+      .post("http://localhost:5000/api/saveProject",params,{
+        "headers": {
+          "content-type": "application/json",
+          "Authorization": "Bearer" + token,
+        },
+      })
+      .then()
+      .catch(err => console.error(err));
+  }
   return (
     <div className="Project">
     <Grid container spacing={2}>
@@ -57,7 +73,7 @@ const Project = (props) => {
         <Grid item xs={12} md={fullScreenView? 12 : 6} lg={fullScreenView? 12 : 6}>
         <Button className="FullScreenToggle" onClick={() => { setfullScreenView(!fullScreenView) }}variant="outlined"> 
         View</Button>
-        <Button className="FullScreenToggle" onClick={() => { }}variant="outlined"> 
+        <Button className="FullScreenToggle" onClick={() => {handleSave()}}variant="outlined"> 
         Save</Button>
         <Output code={totalCode}></Output>
         </Grid>

@@ -138,6 +138,15 @@ app.post('/api/newProject', (req,res) => {
   });
 })
 
+app.post('/api/saveProject',(req,res) => {
+  project.findById({_id:req.body.id},(err,result)=>{
+    result.html=req.body.html;
+    result.css=req.body.css;
+    result.js=req.body.js;
+  })
+  res.send({message:"Successfully saved"});
+})
+
   app.listen(port, () => {
     console.log(`listening at http://localhost:${port}`)
   })
