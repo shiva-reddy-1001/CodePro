@@ -13,6 +13,7 @@ const Project = (props) => {
   const [fullScreenView, setfullScreenView] = useState(false);
   const [codeMode, setcodeMode] = useState(0);
   let token;
+  let userName;
   const {id} = props.match.params;
   useEffect(() => {
     axios.get('http://localhost:5000/api/getProject/'+id,)
@@ -26,6 +27,7 @@ const Project = (props) => {
   
   useEffect(() => {
     token = localStorage.getItem("token");
+    userName = localStorage.getItem("username");
     const timeout = setTimeout(() => {
       settotalCode(`
         <html>
@@ -56,6 +58,11 @@ const Project = (props) => {
       .then(console.log("saved"))
       .catch(err => console.error(err));
   }
+
+  const handlemyProjects = () => {
+    console.log(userName);
+    window.location.href = 'http://localhost:3000/#/'+userName;
+  }
   return (
     <div className="Project">
     <Grid container spacing={2}>
@@ -76,6 +83,8 @@ const Project = (props) => {
         View</Button>
         <Button className="FullScreenToggle" onClick={() => {handleSave()}}variant="outlined"> 
         Save</Button>
+        <Button className="FullScreenToggle" onClick={() => {handlemyProjects()}}variant="outlined"> 
+        My Projects</Button>
         <Output code={totalCode}></Output>
         </Grid>
       </Grid> 
