@@ -47,6 +47,7 @@ const LoginBox = (props) => {
       .then(res => {
         localStorage.setItem("username", res.data.username);  
         localStorage.setItem("token", res.data.token);
+        window.location.href = 'http://localhost:3000/#/'+username;
       })
       .catch(err => console.error(err));
   };

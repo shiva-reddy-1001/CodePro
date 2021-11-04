@@ -6,7 +6,6 @@ const projectSchema = {
     html:String,
     css:String,
     js:String,
-    private:Boolean,
     name:String,
     owner:String,
   };

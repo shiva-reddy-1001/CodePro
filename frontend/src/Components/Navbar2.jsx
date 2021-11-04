@@ -11,12 +11,12 @@ const NavBar = () => {
     const {username} = useParams();
     const handleLogout = () => {
         localStorage.clear();
-        window.location.href = 'http://localhost:5000';
+        window.location.href = 'http://localhost:3000/#/';
     }
     const handleNewproject = () => {
-        if({username}){
+        if(username){
             const params = JSON.stringify({
-                "username": {username},
+                "username": username,
                 "name": name
               });
               axios
@@ -26,10 +26,7 @@ const NavBar = () => {
                 },
                 })
                 .then(res => {
-                    if(res.data===true){
-                        //window.location.href = 'http://localhost:3000/#/'+userName;
-                        //redirect to editor
-                    }
+                    window.location.href = 'http://localhost:3000/#/projects/'+res.data.id;
                 })
         }
     }
@@ -42,7 +39,8 @@ const NavBar = () => {
                     <div className="homebuttons">
                     <Popup trigger={<Button variant="contained" component="span">New Project</Button>} position="bottom">
                         <div>
-                            <input type="text" placeholder="name of project" />
+                            <input type="text" placeholder="name of project" 
+                            onChange={(e)=>setName(e.target.value)}/>
                             <Button variant="text" onClick={handleNewproject}>Create</Button>
                         </div>
                         {/* <textarea label="name"

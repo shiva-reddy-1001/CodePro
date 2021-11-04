@@ -118,6 +118,7 @@ app.post('/api/userValidation',(req,res) => {
 app.post('/api/newProject', (req,res) => {
   const username = req.body.username;
   const name = req.body.name;
+  console.log(username,name);
   // user.findOne({username: username}, (err,result) => {
 
   // })
@@ -125,7 +126,6 @@ app.post('/api/newProject', (req,res) => {
     html:"",
     css:"",
     js:"",
-    private:true,
     name:name,
     owner:username,
   });
@@ -133,7 +133,7 @@ app.post('/api/newProject', (req,res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log("success");
+      res.send({name: name,id: newProject._id});
     }
   });
 })
