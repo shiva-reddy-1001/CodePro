@@ -12,8 +12,8 @@ const Project = (props) => {
   const [totalCode, settotalCode] = useState("");
   const [fullScreenView, setfullScreenView] = useState(false);
   const [codeMode, setcodeMode] = useState(0);
-  let token;
-  let userName;
+  const [username, setUsername] = useState("");
+  const [token, setToken] = useState("");
   const {id} = props.match.params;
   useEffect(() => {
     axios.get('http://localhost:5000/api/getProject/'+id,)
@@ -26,8 +26,8 @@ const Project = (props) => {
   },[])
   
   useEffect(() => {
-    token = localStorage.getItem("token");
-    userName = localStorage.getItem("username");
+    setToken(localStorage.getItem("token")) ;
+    setUsername(localStorage.getItem("username")) ;
     const timeout = setTimeout(() => {
       settotalCode(`
         <html>
@@ -60,8 +60,9 @@ const Project = (props) => {
   }
 
   const handlemyProjects = () => {
-    console.log(userName);
-    window.location.href = 'http://localhost:3000/#/'+userName;
+    console.log(username);
+    console.log(token);
+    window.location.href = 'http://localhost:3000/#/'+username;
   }
   return (
     <div className="Project">
