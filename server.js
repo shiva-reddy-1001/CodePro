@@ -115,6 +115,29 @@ app.post('/api/userValidation',(req,res) => {
   }
 })
 
+app.post('/api/newProject', (req,res) => {
+  const username = req.body.username;
+  const name = req.body.name;
+  // user.findOne({username: username}, (err,result) => {
+
+  // })
+  const newProject = new project({
+    html:"",
+    css:"",
+    js:"",
+    private:true,
+    name:name,
+    owner:username,
+  });
+  newProject.save(function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("success");
+    }
+  });
+})
+
   app.listen(port, () => {
     console.log(`listening at http://localhost:${port}`)
   })

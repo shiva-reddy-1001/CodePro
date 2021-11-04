@@ -4,7 +4,7 @@ import Output from './Components/Output';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ProjectCard from './Components/ProjectCard';
-import Navbar from './Components/Navbar';
+import Navbar2 from './Components/Navbar2';
 import axios from 'axios';
 import { useParams } from 'react-router';
 
@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
     return (
         <div>
-            <Navbar/>
+            <Navbar2/>
         <div className="DisplayCards">
             <Grid container spacing={3}>
             {
