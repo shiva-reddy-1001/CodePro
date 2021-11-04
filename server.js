@@ -93,7 +93,6 @@ app.post('/api/login', (req, res) => {
         bcrypt.compare(password, foundUser.password, function (err, result) {
           if (result) {
             const token = generateToken({ id: userName });
-            console.log(token);
             res.send({ username: userName, token: token });
           }
           else {
@@ -139,10 +138,8 @@ app.post('/api/newProject', (req,res) => {
 })
 
 app.post('/api/saveProject',(req,res) => {
-  project.findById({_id:req.body.id},(err,result)=>{
-    result.html=req.body.html;
-    result.css=req.body.css;
-    result.js=req.body.js;
+  project.findByIdAndUpdate(req.body.id,{html:req.body.html,css:req.body.css,js:req.body.js},(err,result)=>{
+    if(err) throw err;
   })
   res.send({message:"Successfully saved"});
 })

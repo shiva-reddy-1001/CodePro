@@ -14,15 +14,16 @@ const Project = (props) => {
   const [codeMode, setcodeMode] = useState(0);
   let token;
   const {id} = props.match.params;
-
-  axios.get('http://localhost:5000/api/getProject/'+id,)
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/getProject/'+id,)
       .then((res) => {
         setjsCode(res.data.js);
         sethtmlCode(res.data.html);
         setcssCode(res.data.css);
       })
       .catch(err => console.error(err))
-
+  },[])
+  
   useEffect(() => {
     token = localStorage.getItem("token");
     const timeout = setTimeout(() => {
@@ -52,7 +53,7 @@ const Project = (props) => {
           "Authorization": "Bearer" + token,
         },
       })
-      .then()
+      .then(console.log("saved"))
       .catch(err => console.error(err));
   }
   return (
