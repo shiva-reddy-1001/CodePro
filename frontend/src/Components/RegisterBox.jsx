@@ -29,6 +29,7 @@ const RegisterBox = (props) => {
           },})
         .then(res => {
           console.log(res);
+          window.location.href = "http://localhost:3000/#/";
         })
         .catch(err => console.error(err));
     }
