@@ -13,7 +13,6 @@ const LoginPage = () => {
     const [loginMode,setLoginMode] = useState(false)
     const switchMode = () => {
         setLoginMode(!loginMode);
-        console.log(loginMode);
     }
     return (
         <div>

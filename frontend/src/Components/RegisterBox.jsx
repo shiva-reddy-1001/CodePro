@@ -4,22 +4,25 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios'
+
 const RegisterBox = (props) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(email && username && firstName && lastName && password){
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(email.match(mailformat) && username && firstName && lastName && password && password2 && password2===password) {
       const params = JSON.stringify({
         "username": username,
         "password": password,
         "firstName": firstName,
         "lastName": lastName,
-        "password": password
+        "email":email,
       });
   
       axios
@@ -27,10 +30,9 @@ const RegisterBox = (props) => {
           "headers": {
             "content-type": "application/json",
           },})
-        .then(res => {
-          console.log(res);
-          window.location.href = "http://localhost:3000/#/";
-        })
+        .then(
+          props.login()
+        )
         .catch(err => console.error(err));
     }
   }
@@ -59,7 +61,9 @@ const RegisterBox = (props) => {
                   onChange={e => setPassword(e.target.value)}
               />
               &emsp;
-              <TextField label="Check Password" type="password" />
+              <TextField label="Check Password" type="password" 
+                onChange={e => setPassword2(e.target.value)}
+              />
               <br/><br/>
               <Button variant="outlined" onClick={handleSubmit}>Register</Button>
               <p>Existing User? <a onClick={props.login}><b>Login</b></a></p>

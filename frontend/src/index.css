@@ -111,6 +111,6 @@ p a {
   margin-top:10%;
 }
 
-/* .homebuttons{
-  margin-right: auto;
-} */
+a:-webkit-any-link {
+  color:white !important;
+}

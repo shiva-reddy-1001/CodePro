@@ -1,10 +1,11 @@
 import Box from '@mui/material/Box';
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import Toolbar from '@mui/material/Toolbar';
-import { Button } from '@mui/material';
+import { Button,TextField} from '@mui/material';
 import { useParams } from 'react-router';
 import Popup from 'reactjs-popup';
-import axios from 'axios'
+import axios from 'axios';
+
 
 const NavBar = () => {
     const [name, setName] = useState('');
@@ -35,12 +36,13 @@ const NavBar = () => {
             <Box sx={{ flexGrow: 1 }}>
                     <Toolbar variant="dense">
                     <h1>{"<CodePro/>"}</h1>
-                    </Toolbar>
+                    
                     <div className="homebuttons">
                     <Popup trigger={<Button variant="contained" component="span">New Project</Button>} position="bottom">
                         <div>
-                            <input type="text" placeholder="name of project" 
+                            <TextField type="text" placeholder="Name of Project" variant="outlined" color="warning"
                             onChange={(e)=>setName(e.target.value)}/>
+                            <br/>
                             <Button variant="text" onClick={handleNewproject}>Create</Button>
                         </div>
                         {/* <textarea label="name"
@@ -53,6 +55,7 @@ const NavBar = () => {
                     </Popup>
 
                     </div>
+                    </Toolbar>
             </Box>
         </div>
     );

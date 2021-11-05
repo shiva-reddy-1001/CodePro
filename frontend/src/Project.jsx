@@ -1,5 +1,5 @@
 import CodeInput from './Components/CodeInput'
-import { useState,useEffect,useParams } from 'react';
+import { useState,useEffect } from 'react';
 import Output from './Components/Output';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -15,6 +15,7 @@ const Project = (props) => {
   const [username, setUsername] = useState("");
   const [token, setToken] = useState("");
   const {id} = props.match.params;
+  
   useEffect(() => {
     axios.get('http://localhost:5000/api/getProject/'+id,)
       .then((res) => {
@@ -23,7 +24,7 @@ const Project = (props) => {
         setcssCode(res.data.css);
       })
       .catch(err => console.error(err))
-  },[])
+  })
   
   useEffect(() => {
     setToken(localStorage.getItem("token")) ;

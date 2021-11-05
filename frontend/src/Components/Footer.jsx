@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <footer>
           <Box>
-            © 2021
+            © Team CodePro 2021
           </Box>
         </footer>
     );

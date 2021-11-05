@@ -117,10 +117,7 @@ app.post('/api/userValidation',(req,res) => {
 app.post('/api/newProject', (req,res) => {
   const username = req.body.username;
   const name = req.body.name;
-  console.log(username,name);
-  // user.findOne({username: username}, (err,result) => {
-
-  // })
+  
   const newProject = new project({
     html:"",
     css:"",
@@ -142,6 +139,13 @@ app.post('/api/saveProject',(req,res) => {
     if(err) throw err;
   })
   res.send({message:"Successfully saved"});
+})
+
+app.post('/api/deleteProject',(req,res) => {
+  project.findByIdAndDelete(req.body.id,(err,result)=>{
+    if(err) throw err;
+  })
+  res.send({message:"Successfully deleted"});
 })
 
   app.listen(port, () => {
