@@ -16,7 +16,7 @@ const HomeScreen = () => {
     .then((res) => {
         setProjects(res.data);
     })
-    })
+    },[])
 
     return (
         <div>

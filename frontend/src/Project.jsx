@@ -17,6 +17,28 @@ const Project = (props) => {
   const {id} = props.match.params;
   
   useEffect(() => {
+    setToken(localStorage.getItem("token")) ;
+    setUsername(localStorage.getItem("username")) ;
+    const params = JSON.stringify({
+      "username": username,
+      "token": token
+    });
+    axios
+      .post('http://localhost:5000/api/userValidation', params, {
+        "headers": {
+          "content-type": "application/json",
+        },
+      })
+      .then(res=>{
+        console.log(res.data);
+        if(res.data===false){
+          console.log(res.data);
+          window.location.href = 'http://localhost:3000/#/';
+        }else{
+          setToken(res.data.token);
+          localStorage.setItem("token",res.data.token);
+        }
+      })
     axios.get('http://localhost:5000/api/getProject/'+id,)
       .then((res) => {
         setjsCode(res.data.js);
@@ -24,7 +46,7 @@ const Project = (props) => {
         setcssCode(res.data.css);
       })
       .catch(err => console.error(err))
-  })
+  },[])
   
   useEffect(() => {
     setToken(localStorage.getItem("token")) ;

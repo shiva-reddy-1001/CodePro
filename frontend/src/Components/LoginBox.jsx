@@ -21,8 +21,8 @@ const LoginBox = (props) => {
           },
         })
         .then(res => {
-          if(res.data===true){
-            console.log("trueeeeee");
+          if(res.data!==false){
+            localStorage.setItem("token",res.data.token);
             window.location.href = 'http://localhost:3000/#/'+userName;
           }
         })

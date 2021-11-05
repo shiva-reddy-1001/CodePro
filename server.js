@@ -36,12 +36,10 @@ const verifyToken = (token) => {
     const decodedData = jwt.verify(token, process.env.JWT_SECRET_KEY);
     return decodedData;
   } catch (err) {
-    if (err.name === "TokenExpiredError") {
-      err.message = "User Session Expired";
-      err.status = 401;
-      throw err;
-    }
-    throw err;
+    // if (err.name === "TokenExpiredError") {
+    //   return false;
+    // }
+    return false;
   }
 };
 
@@ -107,10 +105,15 @@ app.post('/api/login', (req, res) => {
   })
 })
 
-app.post('/api/userValidation',(req,res) => {
-  const details = verifyToken(req.body.token);
+app.post('/api/userValidation',async (req,res) => {
+  const userName = req.body.username;
+  const details = await verifyToken(req.body.token);
   if(details){
-    res.send(true);
+    const token = generateToken({ id: userName });
+    res.send({token: token});
+  }else if(details===false){
+    console.log(details);
+    res.send(false);
   }
 })
 
