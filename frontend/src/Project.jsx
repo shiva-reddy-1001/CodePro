@@ -14,6 +14,8 @@ const Project = (props) => {
   const [totalCode, settotalCode] = useState("");
   const [fullScreenView, setfullScreenView] = useState(false);
   const [codeMode, setcodeMode] = useState(0);
+  const [open, setOpen] = useState(false);
+
   
   const {id} = props.match.params;
   let token,username;
