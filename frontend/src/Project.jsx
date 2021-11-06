@@ -12,13 +12,15 @@ const Project = (props) => {
   const [totalCode, settotalCode] = useState("");
   const [fullScreenView, setfullScreenView] = useState(false);
   const [codeMode, setcodeMode] = useState(0);
-  const [username, setUsername] = useState("");
-  const [token, setToken] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [token, setToken] = useState("");
   const {id} = props.match.params;
-  
+  let token,username;
+  token = localStorage.getItem("token") ;
+  username = localStorage.getItem("username") ;
   useEffect(() => {
-    setToken(localStorage.getItem("token")) ;
-    setUsername(localStorage.getItem("username")) ;
+    token = localStorage.getItem("token") ;
+    username = localStorage.getItem("username") ;
     const params = JSON.stringify({
       "username": username,
       "token": token
@@ -35,7 +37,7 @@ const Project = (props) => {
           console.log(res.data);
           window.location.href = 'http://localhost:3000/#/';
         }else{
-          setToken(res.data.token);
+          //setToken(res.data.token);
           localStorage.setItem("token",res.data.token);
         }
       })
@@ -49,8 +51,6 @@ const Project = (props) => {
   },[])
   
   useEffect(() => {
-    setToken(localStorage.getItem("token")) ;
-    setUsername(localStorage.getItem("username")) ;
     const timeout = setTimeout(() => {
       settotalCode(`
         <html>

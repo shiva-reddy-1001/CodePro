@@ -50,7 +50,7 @@ const NavBar = () => {
                         /> */}
                     </Popup>
                     
-                    <Popup trigger={<Button color="secondary">Hi Mr.{username}!</Button>} position="bottom">
+                    <Popup trigger={<Button color="secondary">Hi {username}!</Button>} position="bottom">
                         <Button variant="text" onClick={handleLogout}>LogOut</Button>
                     </Popup>
 
