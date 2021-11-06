@@ -12,7 +12,14 @@ const HomeScreen = () => {
     const [projects,setProjects] = useState([]);
 
     useEffect(() => {
-    axios.get('http://localhost:5000/api/getAllProjects/'+username,)
+    const token = localStorage.getItem("token");
+    //console.log(token);
+    axios.get('http://localhost:5000/api/getAllProjects/'+username,{
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    })
     .then((res) => {
         setProjects(res.data);
     })
