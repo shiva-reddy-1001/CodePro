@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios'
-
+  
 const RegisterBox = (props) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -67,10 +67,11 @@ const RegisterBox = (props) => {
               <br/><br/>
               <Button variant="outlined" onClick={handleSubmit}>Register</Button>
               <p>Existing User? <a onClick={props.login}><b>Login</b></a></p>
-              </CardContent>
+            </CardContent>
         </Card>
         </div>
-      );
+ 
+ );
 }
 
 export default RegisterBox;

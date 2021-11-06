@@ -1,9 +1,11 @@
 import CodeInput from './Components/CodeInput'
-import { useState,useEffect } from 'react';
+import React,{ useState,useEffect } from 'react';
 import Output from './Components/Output';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const Project = (props) => {
   const [jsCode, setjsCode] = useState("");
@@ -12,12 +14,16 @@ const Project = (props) => {
   const [totalCode, settotalCode] = useState("");
   const [fullScreenView, setfullScreenView] = useState(false);
   const [codeMode, setcodeMode] = useState(0);
+  const [open, setOpen] = useState(false);
   // const [username, setUsername] = useState("");
   // const [token, setToken] = useState("");
   const {id} = props.match.params;
   let token,username;
   token = localStorage.getItem("token") ;
   username = localStorage.getItem("username") ;
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
   useEffect(() => {
     token = localStorage.getItem("token") ;
     username = localStorage.getItem("username") ;
@@ -65,6 +71,7 @@ const Project = (props) => {
   }, [htmlCode, cssCode, jsCode])
 
   const handleSave = () => {
+    setOpen(true);
     const params = JSON.stringify({
       html:htmlCode,
       css:cssCode,
@@ -81,6 +88,14 @@ const Project = (props) => {
       .then(console.log("saved"))
       .catch(err => console.error(err));
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const handlemyProjects = () => {
     console.log(username);
@@ -111,6 +126,11 @@ const Project = (props) => {
         My Projects</Button>
         <Output code={totalCode}></Output>
         </Grid>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Project Saved Succesfully!
+          </Alert>
+        </Snackbar>
       </Grid> 
     </div>
   );
