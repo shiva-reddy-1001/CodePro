@@ -15,7 +15,7 @@ const ProjectCard = (props) => {
       .post("http://localhost:5000/api/deleteProject",params,{
         "headers": {
           "content-type": "application/json",
-          "Authorization": "Bearer" + token,
+          "Authorization": "Bearer " + token,
         },
       })
       .then(window.location.reload(true))

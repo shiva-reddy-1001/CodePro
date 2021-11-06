@@ -3,8 +3,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import axios from 'axios'
-  
+import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
+
 const RegisterBox = (props) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -12,6 +15,12 @@ const RegisterBox = (props) => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [openAlert,setOpenAlert] = useState(false);
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {return;}
+    setOpenAlert(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +43,9 @@ const RegisterBox = (props) => {
           props.login()
         )
         .catch(err => console.error(err));
+    }
+    else {
+      setOpenAlert(true);
     }
   }
     return (
@@ -69,6 +81,11 @@ const RegisterBox = (props) => {
               <p>Existing User? <a onClick={props.login}><b>Login</b></a></p>
             </CardContent>
         </Card>
+        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleAlertClose}>
+          <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
+            Please check your Email or password!
+          </Alert>
+        </Snackbar>
         </div>
  
  );

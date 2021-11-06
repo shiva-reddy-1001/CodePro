@@ -4,34 +4,42 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios'
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const LoginBox = (props) => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [openAlert,setOpenAlert] = useState(false);
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {return;}
+    setOpenAlert(false);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const userName = localStorage.getItem("username");
-    if(token && userName){
-      const params = JSON.stringify({
-        "username": userName,
-        "token": token
-      });
+    if(token){
       axios
-        .post("http://localhost:5000/api/userValidation", params, {
+        .post("http://localhost:5000/api/userValidation",{}, {
           "headers": {
             "content-type": "application/json",
+            "Authorization": "Bearer " + token,
           },
         })
         .then(res => {
-          if(res.data!==false){
+            //console.log(res.data)
+            const userName = res.data.username;
             localStorage.setItem("token",res.data.token);
             window.location.href = 'http://localhost:3000/#/'+userName;
-          }
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
     
   })
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,11 +54,12 @@ const LoginBox = (props) => {
           "content-type": "application/json",
         },})
       .then(res => {
+        console.log("sippp")
         localStorage.setItem("username", res.data.username);  
         localStorage.setItem("token", res.data.token);
         window.location.href = 'http://localhost:3000/#/'+username;
       })
-      .catch(err => console.error(err));
+      .catch(err => setOpenAlert(true));
   };
 
     return (
@@ -70,6 +79,11 @@ const LoginBox = (props) => {
               <p>New User? <a onClick={props.register}><b>Register</b></a></p>
               </CardContent>
         </Card>
+        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleAlertClose}>
+          <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
+            Please check your username and password!
+          </Alert>
+        </Snackbar>
         </div>
       );
 }

@@ -22,39 +22,46 @@ mongoose.connect(process.env.MONGO_URI, {
 
 const user = require('./Models/User.js')
 const project = require('./Models/Project.js');
-const { strictEqual } = require('assert');
-
 
 const generateToken = (tokenData) => {
   const token = jwt.sign({ data: tokenData }, process.env.JWT_SECRET_KEY, {
-    expiresIn: "1h",
+    expiresIn: process.env.JWT_EXPIRATION,
   });
   return token;
 };
-const verifyToken = (token) => {
-  try {
-    const decodedData = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    return decodedData;
-  } catch (err) {
-    // if (err.name === "TokenExpiredError") {
-    //   return false;
-    // }
-    return false;
-  }
+
+
+const verifyToken = (req,res,next) => {
+  const Header = req.headers["authorization"];
+  const token = Header && Header.split(" ")[1];
+  //console.log(req.headers["authorization"]);
+  if(token===null || token===undefined) {return res.sendStatus(401)}
+  jwt.verify(token, process.env.JWT_SECRET_KEY,(err,user) => {
+    if(err){
+      //console.log(token);
+      res.status(403).json({
+        message: "Invalid Token"
+      })
+    }
+    else{
+      req.user = user;
+      next();
+    }
+  })
 };
 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/api/getProject/:id', (req, res) => {
+app.get('/api/getProject/:id',verifyToken, (req, res) => {
   project.findOne({ _id: req.params.id }, (err, data) => {
     if (err) throw err
     res.send(data)
   })
 });
 
-app.get('/api/getAllProjects/:username', (req, res) => {
+app.get('/api/getAllProjects/:username',verifyToken, (req, res) => {
   project.find({ owner: req.params.username }, (err, data) => {
     if (err) throw err
     res.send(data)
@@ -85,7 +92,7 @@ app.post('/api/login', (req, res) => {
 
   user.findOne({ username: userName }, function (err, foundUser) {
     if(err) {
-      console.log(err);
+      res.sendStatus(403);
     } else {
       if (foundUser) {
         bcrypt.compare(password, foundUser.password, function (err, result) {
@@ -94,30 +101,28 @@ app.post('/api/login', (req, res) => {
             res.send({ username: userName, token: token });
           }
           else {
-            res.status(401);
+            res.sendStatus(403);
           }
         });
       }
       else {
-        res.status(401);
+        res.sendStatus(403);
       }
     }
   })
 })
 
-app.post('/api/userValidation',async (req,res) => {
-  const userName = req.body.username;
-  const details = await verifyToken(req.body.token);
-  if(details){
+app.post('/api/userValidation',verifyToken,(req,res) => {
+  const userName = req.user.data.id;
+  //console.log(req.user);
+  //console.log(userName);
+  if(req.user.data.id){
     const token = generateToken({ id: userName });
-    res.send({token: token});
-  }else if(details===false){
-    console.log(details);
-    res.send(false);
+    res.send({token: token,username:userName});
   }
 })
 
-app.post('/api/newProject', (req,res) => {
+app.post('/api/newProject',verifyToken, (req,res) => {
   const username = req.body.username;
   const name = req.body.name;
   
@@ -137,14 +142,14 @@ app.post('/api/newProject', (req,res) => {
   });
 })
 
-app.post('/api/saveProject',(req,res) => {
+app.post('/api/saveProject',verifyToken,(req,res) => {
   project.findByIdAndUpdate(req.body.id,{html:req.body.html,css:req.body.css,js:req.body.js},(err,result)=>{
     if(err) throw err;
   })
   res.send({message:"Successfully saved"});
 })
 
-app.post('/api/deleteProject',(req,res) => {
+app.post('/api/deleteProject',verifyToken, (req,res) => {
   project.findByIdAndDelete(req.body.id,(err,result)=>{
     if(err) throw err;
   })

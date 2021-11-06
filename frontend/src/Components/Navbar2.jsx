@@ -10,6 +10,7 @@ import axios from 'axios';
 const NavBar = () => {
     const [name, setName] = useState('');
     const {username} = useParams();
+    const token  = localStorage.getItem("token");
     const handleLogout = () => {
         localStorage.clear();
         window.location.href = 'http://localhost:3000/#/';
@@ -24,6 +25,7 @@ const NavBar = () => {
                 .post("http://localhost:5000/api/newProject", params, {
                 "headers": {
                     "content-type": "application/json",
+                    "Authorization": "Bearer " + token,
                 },
                 })
                 .then(res => {

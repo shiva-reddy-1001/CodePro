@@ -14,9 +14,7 @@ const Project = (props) => {
   const [totalCode, settotalCode] = useState("");
   const [fullScreenView, setfullScreenView] = useState(false);
   const [codeMode, setcodeMode] = useState(0);
-  const [open, setOpen] = useState(false);
-  // const [username, setUsername] = useState("");
-  // const [token, setToken] = useState("");
+  
   const {id} = props.match.params;
   let token,username;
   token = localStorage.getItem("token") ;
@@ -35,25 +33,32 @@ const Project = (props) => {
       .post('http://localhost:5000/api/userValidation', params, {
         "headers": {
           "content-type": "application/json",
+          "Authorization": "Bearer " + token,
         },
       })
       .then(res=>{
-        console.log(res.data);
-        if(res.data===false){
-          console.log(res.data);
-          window.location.href = 'http://localhost:3000/#/';
-        }else{
-          //setToken(res.data.token);
           localStorage.setItem("token",res.data.token);
-        }
       })
-    axios.get('http://localhost:5000/api/getProject/'+id,)
+      .catch(err=>{
+        window.location.href = 'http://localhost:3000/#/';
+      })
+    axios.get('http://localhost:5000/api/getProject/'+id,{
+      "headers": {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+    })
       .then((res) => {
         setjsCode(res.data.js);
         sethtmlCode(res.data.html);
         setcssCode(res.data.css);
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        if(err.Status === 403){
+          console.log(err.data,"simppp");
+          window.location.href = 'http://localhost:3000/#/';
+        }
+      })
   },[])
   
   useEffect(() => {
@@ -78,11 +83,12 @@ const Project = (props) => {
       js:jsCode,
       id: id
     });
+    token = localStorage.getItem("token");
     axios
       .post("http://localhost:5000/api/saveProject",params,{
         "headers": {
           "content-type": "application/json",
-          "Authorization": "Bearer" + token,
+          "Authorization": "Bearer " + token,
         },
       })
       .then(console.log("saved"))
@@ -98,8 +104,6 @@ const Project = (props) => {
   };
 
   const handlemyProjects = () => {
-    console.log(username);
-    console.log(token);
     window.location.href = 'http://localhost:3000/#/'+username;
   }
   return (
