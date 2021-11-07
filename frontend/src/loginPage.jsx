@@ -6,7 +6,7 @@ import LoginBox from "./Components/LoginBox";
 import NavBar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import RegisterBox from "./Components/RegisterBox";
-
+import ThemeSelector from './Themes/ThemeSelector';
 
 const LoginPage = () => {
 

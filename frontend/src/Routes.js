@@ -5,7 +5,6 @@ import HomeScreen from "./HomeScreen";
 import LoginPage from "./loginPage";
 import Project from "./Project";
 
-
 const Routes = () => {
     return (
         <Router>

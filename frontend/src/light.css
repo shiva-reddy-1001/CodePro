@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0288d1;
+  color: #EEEEEE;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+iframe {
+  border: none;
+}
+
+.output {
+  height: 100vh;
+  overflow-y: visible;
+  background-color: #FFFFFF !important;
+}
+
+.FullScreenToggle {
+  top: 5px;
+  right: 5px;
+  float: right;
+  margin-left: 5px !important;
+}
+
+.CodeMirror {
+  height: 100vh !important;
+}
+
+.codeMode {
+  top: 5px;
+  left: 10px;
+  margin-left: 5px !important;
+}
+
+.codeInput {
+  height: 100%;
+  margin-top: 10px;
+}
+
+.LoginBox {
+  padding: 10% 10%;
+  width: 300px;
+  height: 350px;
+  color: #EEEEEE;
+}
+
+.LoginBox h3 {
+  color: #0288d1 !important;
+}
+
+.RegisterBox {
+  padding: 10% 10%;
+  width: 600px;
+  height: 350px;
+  color: #EEEEEE;
+}
+
+.RegisterBox h3 {
+  color: #0288d1 !important;
+}
+
+button {
+  border: 1px solid #0288d1 !important;
+  color: #EEEEEE !important;
+  background-color: #0288d1 !important;
+}
+
+footer {
+  text-align: center;
+  /* background-color: #2D4059; */
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 98.5vw;
+}
+
+p a {
+  text-decoration: none;
+  color: #0288d1 !important;
+}
+
+.Navbar h1 {
+  padding-left: 3%;
+  font-weight: 900;
+  flex-grow: 1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.Navbar {
+  color: #EEEEEE;
+}
+
+.Description {
+  padding: 10% 10%;
+  height: 64vh;
+  font-size: 24px;
+}
+
+.DisplayCards {
+  margin: auto;
+  width: 60%;
+  margin-top: 10%;
+}
+
+a:-webkit-any-link {
+  color: white !important;
+}

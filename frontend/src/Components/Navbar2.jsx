@@ -1,11 +1,12 @@
 import Box from '@mui/material/Box';
 import React,{useState} from "react";
 import Toolbar from '@mui/material/Toolbar';
+import { styled } from '@mui/material/styles';
 import { Button,TextField} from '@mui/material';
 import { useParams } from 'react-router';
 import Popup from 'reactjs-popup';
 import axios from 'axios';
-
+import { grey } from '@mui/material/colors';
 
 const NavBar = () => {
     const [name, setName] = useState('');
@@ -33,6 +34,13 @@ const NavBar = () => {
                 })
         }
     }
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText(grey[50]),
+        backgroundColor: grey[50],
+        '&:hover': {
+          backgroundColor: grey[700],
+        },
+      }));
     return (
         <div className="Navbar">
             <Box sx={{ flexGrow: 1 }}>
@@ -40,7 +48,7 @@ const NavBar = () => {
                     <h1>{"<CodePro/>"}</h1>
                     
                     <div className="homebuttons">
-                    <Popup trigger={<Button variant="contained" component="span">New Project</Button>} position="bottom">
+                    <Popup trigger={<Button variant="contained" component="span">New Project</Button >} position="bottom">
                         <div>
                             <TextField type="text" placeholder="Name of Project" variant="outlined" color="warning"
                             onChange={(e)=>setName(e.target.value)}/>

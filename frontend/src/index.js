@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import Routes from './Routes'
-
+import Routes from './Routes';
+import ThemeSelector from './Themes/ThemeSelector';
 ReactDOM.render(
+  <ThemeSelector>
     <Routes>
-    </Routes>,
+    </Routes>
+    </ThemeSelector>,
   document.getElementById('root')
 );
