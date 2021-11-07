@@ -4,7 +4,7 @@ import './index.css';
 import Routes from './Routes'
 
 ReactDOM.render(
-    <Routes>
-    </Routes>,
+  <Routes>
+  </Routes>,
   document.getElementById('root')
 );

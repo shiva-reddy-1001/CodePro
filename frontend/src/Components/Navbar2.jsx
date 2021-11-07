@@ -47,9 +47,7 @@ const NavBar = () => {
                             <br/>
                             <Button variant="text" onClick={handleNewproject}>Create</Button>
                         </div>
-                        {/* <textarea label="name"
-                            onChange={e => setName(e.target.value)}
-                        /> */}
+                       
                     </Popup>
                     
                     <Popup trigger={<Button color="secondary">Hi {username}!</Button>} position="bottom">

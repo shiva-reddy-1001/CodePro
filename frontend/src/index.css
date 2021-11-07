@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap');
 
-/* https://colorhunt.co/palette/2228312d40590288d1eeeeee */
-
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #0288d1; 
+  background-color: #0288d1;
   color: #EEEEEE;
 }
 
@@ -15,16 +13,16 @@ code {
 }
 
 iframe {
-  border : none;
+  border: none;
 }
 
-.output{
+.output {
   height: 100vh;
   overflow-y: visible;
   background-color: #FFFFFF !important;
 }
 
-.FullScreenToggle{
+.FullScreenToggle {
   top: 5px;
   right: 5px;
   float: right;
@@ -32,39 +30,39 @@ iframe {
 }
 
 .CodeMirror {
-   height: 100vh !important;
+  height: 100vh !important;
 }
 
 .codeMode {
   top: 5px;
-  left:10px;
+  left: 10px;
   margin-left: 5px !important;
 }
 
-.codeInput{
+.codeInput {
   height: 100%;
-  margin-top:10px;
+  margin-top: 10px;
 }
 
-.LoginBox{
+.LoginBox {
   padding: 10% 10%;
   width: 300px;
   height: 350px;
   color: #EEEEEE;
 }
 
-.LoginBox h3{
+.LoginBox h3 {
   color: #0288d1 !important;
 }
 
-.RegisterBox{
+.RegisterBox {
   padding: 10% 10%;
   width: 600px;
   height: 350px;
   color: #EEEEEE;
 }
 
-.RegisterBox h3{
+.RegisterBox h3 {
   color: #0288d1 !important;
 }
 
@@ -74,7 +72,7 @@ button {
   background-color: #0288d1 !important;
 }
 
-footer{
+footer {
   text-align: center;
   /* background-color: #2D4059; */
   left: 0;
@@ -88,7 +86,7 @@ p a {
   color: #0288d1 !important;
 }
 
-.Navbar h1{
+.Navbar h1 {
   padding-left: 3%;
   font-weight: 900;
   flex-grow: 1;
@@ -100,17 +98,17 @@ p a {
 }
 
 .Description {
-  padding:10% 10%;
-  height:64vh;
-  font-size:24px;
+  padding: 10% 10%;
+  height: 64vh;
+  font-size: 24px;
 }
 
 .DisplayCards {
-  margin:auto;
+  margin: auto;
   width: 60%;
-  margin-top:10%;
+  margin-top: 10%;
 }
 
 a:-webkit-any-link {
-  color:white !important;
+  color: white !important;
 }

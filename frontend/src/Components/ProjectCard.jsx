@@ -1,18 +1,18 @@
 
-import {Card, CardMedia, CardContent,CardActions, Typography, Button} from '@mui/material'
-import {Link} from 'react-router-dom'
+import { Card, CardMedia, CardContent, CardActions, Typography, Button } from '@mui/material'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const ProjectCard = (props) => {
-    const token = localStorage.getItem("token");
-    const handleDelete = (id) => {
-      const params = JSON.stringify({
-        id: id
-      });
-      axios
-      .post("http://localhost:5000/api/deleteProject",params,{
+  const token = localStorage.getItem("token");
+  const handleDelete = (id) => {
+    const params = JSON.stringify({
+      id: id
+    });
+    axios
+      .post("http://localhost:5000/api/deleteProject", params, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Bearer " + token,
@@ -20,16 +20,16 @@ const ProjectCard = (props) => {
       })
       .then(window.location.reload(true))
       .catch(err => console.error(err));
-      
-    }
 
-    const code =`
+  }
+
+  const code = `
     <html>
       <body>${props.htmlCode}</body>
       <style>${props.cssCode}</style>
     </html>
   `;
-    return (
+  return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="iframe"
@@ -43,16 +43,15 @@ const ProjectCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-         
         <Button className="codeMode" size="small">
-        <Link to={`/projects/${props.id}`} color="white"><EditIcon></EditIcon></Link>
+          <Link to={`/projects/${props.id}`} color="white"><EditIcon></EditIcon></Link>
         </Button>
-        <Button className="codeMode" size="small" variant="danger" onClick={()=>handleDelete(props.id)}>
-        <DeleteIcon></DeleteIcon>
+        <Button className="codeMode" size="small" variant="danger" onClick={() => handleDelete(props.id)}>
+          <DeleteIcon></DeleteIcon>
         </Button>
       </CardActions>
     </Card>
-    );
+  );
 }
 
 export default ProjectCard;

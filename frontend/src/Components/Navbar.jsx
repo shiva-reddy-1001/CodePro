@@ -5,12 +5,12 @@ const NavBar = () => {
     return (
         <div className="Navbar">
             <Box sx={{ flexGrow: 1 }}>
-                    <Toolbar variant="dense">
+                <Toolbar variant="dense">
                     <h1>{"<CodePro/>"}</h1>
-                    </Toolbar>
+                </Toolbar>
             </Box>
         </div>
     );
-} 
+}
 
 export default NavBar;
