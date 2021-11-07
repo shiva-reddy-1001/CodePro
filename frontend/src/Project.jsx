@@ -117,9 +117,9 @@ const Project = (props) => {
         {!fullScreenView &&
 
           <Grid item xs={12} md={6} lg={6}>
-            <Button className="codeMode" onClick={() => { setcodeMode(0) }} variant="outlined"> HTML</Button>
-            <Button className="codeMode" onClick={() => { setcodeMode(1) }} variant="outlined"> CSS</Button>
-            <Button className="codeMode" onClick={() => { setcodeMode(2) }} variant="outlined"> JS</Button>
+            <Button disabled={codeMode===0} className={codeMode === 0 ? "codeMode-active" : "codeMode-inactive"} onClick={() => { setcodeMode(0) }} variant="outlined"> HTML</Button>
+            <Button disabled={codeMode===1} className={codeMode === 1 ? "codeMode-active" : "codeMode-inactive"} onClick={() => { setcodeMode(1) }} variant="outlined"> CSS</Button>
+            <Button disabled={codeMode===2} className={codeMode === 2 ? "codeMode-active" : "codeMode-inactive"} onClick={() => { setcodeMode(2) }} variant="outlined"> JS</Button>
             {codeMode === 0 && <CodeInput language="xml" value={htmlCode} save={sethtmlCode}></CodeInput>}
             {codeMode === 1 && <CodeInput language="css" value={cssCode} save={setcssCode}></CodeInput>}
             {codeMode === 2 && <CodeInput language="javascript" value={jsCode} save={setjsCode}></CodeInput>}
