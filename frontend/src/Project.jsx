@@ -34,7 +34,7 @@ const Project = (props) => {
       "token": token
     });
     axios
-      .post('http://localhost:5000/api/userValidation', params, {
+      .post('/api/userValidation', params, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Bearer " + token,
@@ -44,10 +44,10 @@ const Project = (props) => {
         localStorage.setItem("token", res.data.token);
       })
       .catch(err => {
-        window.location.href = 'http://localhost:3000/#/';
+        window.location.href = '/#/';
       })
 
-    axios.get('http://localhost:5000/api/getProject/' + id, {
+    axios.get('/api/getProject/' + id, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Bearer " + token,
@@ -59,10 +59,7 @@ const Project = (props) => {
         setcssCode(res.data.css);
       })
       .catch(err => {
-        if (err.Status === 403) {
-          console.log(err.data);
-          window.location.href = 'http://localhost:3000/#/';
-        }
+        window.location.href = '/#/';
       })
   }, [])
 
@@ -90,7 +87,7 @@ const Project = (props) => {
     });
     token = localStorage.getItem("token");
     axios
-      .post("http://localhost:5000/api/saveProject", params, {
+      .post("/api/saveProject", params, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Bearer " + token,
@@ -109,7 +106,7 @@ const Project = (props) => {
   };
 
   const handlemyProjects = () => {
-    window.location.href = 'http://localhost:3000/#/' + username;
+    window.location.href = '/#/' + username;
   }
   return (
     <div className="Project">

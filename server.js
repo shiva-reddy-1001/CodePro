@@ -24,65 +24,16 @@ mongoose.connect(process.env.MONGO_URI, {
 
 const user = require('./Models/User.js')
 const project = require('./Models/Project.js');
-
-const generateToken = (tokenData) => {
-  const token = jwt.sign({
-    data: tokenData
-  }, process.env.JWT_SECRET_KEY, {
-    expiresIn: process.env.JWT_EXPIRATION,
-  });
-  return token;
-};
-
-
-const verifyToken = (req, res, next) => {
-  const Header = req.headers["authorization"];
-  const token = Header && Header.split(" ")[1];
-
-  if (token === null || token === undefined) {
-    return res.sendStatus(401)
-  }
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
-    if (err) {
-
-      res.status(403).json({
-        message: "Invalid Token"
-      })
-    } else {
-      req.user = user;
-      next();
-    }
-  })
-};
+const {generateToken,verifyToken} = require('./Authentication/jwt.js');
 
 app.get('/', (req, res) => {
   res.render('index');
-});
-
-app.get('/api/getProject/:id', verifyToken, (req, res) => {
-  project.findOne({
-    _id: req.params.id
-  }, (err, data) => {
-    if (err) throw err
-    res.send(data)
-  })
-});
-
-app.get('/api/getAllProjects/:username', verifyToken, (req, res) => {
-  project.find({
-    owner: req.params.username
-  }, (err, data) => {
-    if (err) throw err
-    res.send(data)
-  })
 });
 
 app.post('/api/register', (req, res) => {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
     const newUser = new user({
       username: req.body.username,
-      firstname: req.body.firstName,
-      lastname: req.body.lastName,
       email: req.body.email,
       password: hash,
     });
@@ -126,6 +77,28 @@ app.post('/api/login', (req, res) => {
     }
   })
 })
+
+app.get('/api/getProject/:id', verifyToken, (req, res) => {
+  project.findOne({
+    _id: req.params.id
+  }, (err, data) => {
+    if (err) throw err
+    res.send(data)
+  })
+});
+
+app.get('/api/getAllProjects/:username', verifyToken, (req, res) => {
+  if(req.user.data.id === req.params.username){
+    project.find({
+      owner: req.params.username
+    }, (err, data) => {
+      if (err) throw err
+      res.send(data)
+    })
+  }else{
+    res.sendStatus(403);
+  }
+});
 
 app.post('/api/userValidation', verifyToken, (req, res) => {
   const userName = req.user.data.id;

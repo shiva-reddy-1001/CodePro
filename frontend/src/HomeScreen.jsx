@@ -13,7 +13,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    axios.get('http://localhost:5000/api/getAllProjects/' + username, {
+    axios.get('/api/getAllProjects/' + username, {
       "headers": {
         "content-type": "application/json",
         "Authorization": "Bearer " + token,
@@ -22,7 +22,10 @@ const HomeScreen = () => {
       .then((res) => {
         setProjects(res.data);
       })
-      .catch(err => window.location.href = 'http://localhost:3000/#/');
+      .catch(err => {
+        console.error(err);
+        window.location.href = '/#/'
+      });
   }, [])
 
   return (

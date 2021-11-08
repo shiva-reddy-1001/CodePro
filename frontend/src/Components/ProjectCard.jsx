@@ -12,7 +12,7 @@ const ProjectCard = (props) => {
       id: id
     });
     axios
-      .post("http://localhost:5000/api/deleteProject", params, {
+      .post("/api/deleteProject", params, {
         "headers": {
           "content-type": "application/json",
           "Authorization": "Bearer " + token,

@@ -11,8 +11,6 @@ import Alert from '@mui/material/Alert';
 const RegisterBox = (props) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [openAlert, setOpenAlert] = useState(false);
@@ -25,17 +23,15 @@ const RegisterBox = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (email.match(mailformat) && username && firstName && lastName && password && password2 && password2 === password) {
+    if (email.match(mailformat) && username && password && password2 && password2 === password) {
       const params = JSON.stringify({
         "username": username,
         "password": password,
-        "firstName": firstName,
-        "lastName": lastName,
         "email": email,
       });
 
       axios
-        .post("http://localhost:5000/api/register", params, {
+        .post("/api/register", params, {
           "headers": {
             "content-type": "application/json",
           },
@@ -57,23 +53,15 @@ const RegisterBox = (props) => {
           <TextField label="Email"
             onChange={e => setEmail(e.target.value)}
           />
-          &emsp;
+          <br /><br />
           <TextField label="Username"
             onChange={e => setUsername(e.target.value)}
-          />
-          <br /><br />
-          <TextField label="First Name"
-            onChange={e => setFirstName(e.target.value)}
-          />
-          &emsp;
-          <TextField label="Last Name"
-            onChange={e => setLastName(e.target.value)}
           />
           <br /><br />
           <TextField label="Password" type="password"
             onChange={e => setPassword(e.target.value)}
           />
-          &emsp;
+          <br /><br />
           <TextField label="Check Password" type="password"
             onChange={e => setPassword2(e.target.value)}
           />

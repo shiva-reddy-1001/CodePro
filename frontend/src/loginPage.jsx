@@ -14,7 +14,7 @@ const LoginPage = () => {
         setLoginMode(!loginMode);
     }
     return (
-        <div>
+        <>
             <NavBar></NavBar>
             <div className="LoginGrid">
                 <Grid container spacing={2} height="100%">
@@ -28,7 +28,7 @@ const LoginPage = () => {
                 </Grid>
             </div>
             <Footer></Footer>
-        </div>
+        </>
     );
 };
 

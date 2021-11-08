@@ -22,7 +22,7 @@ const LoginBox = (props) => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .post("http://localhost:5000/api/userValidation", {}, {
+        .post("/api/userValidation", {}, {
           "headers": {
             "content-type": "application/json",
             "Authorization": "Bearer " + token,
@@ -32,7 +32,7 @@ const LoginBox = (props) => {
 
           const userName = res.data.username;
           localStorage.setItem("token", res.data.token);
-          window.location.href = 'http://localhost:3000/#/' + userName;
+          window.location.href = '/#/' + userName;
         })
         .catch(err => {
           console.log(err)
@@ -49,7 +49,7 @@ const LoginBox = (props) => {
     });
 
     axios
-      .post("http://localhost:5000/api/login", params, {
+      .post("/api/login", params, {
         "headers": {
           "content-type": "application/json",
         },
@@ -58,7 +58,7 @@ const LoginBox = (props) => {
 
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("token", res.data.token);
-        window.location.href = 'http://localhost:3000/#/' + username;
+        window.location.href = '/#/' + username;
       })
       .catch(err => setOpenAlert(true));
   };
