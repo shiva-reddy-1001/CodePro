@@ -14,6 +14,7 @@ const RegisterBox = (props) => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [openAlert, setOpenAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("Please check your Email or password!");
 
   const handleAlertClose = (event, reason) => {
     if (reason === 'clickaway') { return; }
@@ -36,12 +37,14 @@ const RegisterBox = (props) => {
             "content-type": "application/json",
           },
         })
-        .then(
-          props.login()
-        )
-        .catch(err => console.error(err));
+        .then( res => props.login())
+        .catch(err => {
+          setAlertMessage("Username Already Taken!");
+          setOpenAlert(true);
+        });
     }
     else {
+      setAlertMessage("Please check your Email or password!");
       setOpenAlert(true);
     }
   }
@@ -72,7 +75,7 @@ const RegisterBox = (props) => {
       </Card>
       <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleAlertClose}>
         <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
-          Please check your Email or password!
+          {alertMessage}
         </Alert>
       </Snackbar>
     </div>
