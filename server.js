@@ -31,20 +31,29 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/register', (req, res) => {
-  bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-    const newUser = new user({
-      username: req.body.username,
-      email: req.body.email,
-      password: hash,
-    });
-    newUser.save(function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("success");
-      }
-    });
-  });
+  user.findOne({
+    username: req.body.username
+  }, (err, userData) => {
+    if (userData) {
+      res.sendStatus(403);
+    } else {
+      bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+        const newUser = new user({
+          username: req.body.username,
+          email: req.body.email,
+          password: hash
+        });
+        newUser.save((err, user) => {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.status(200).send(user);
+          }
+        });
+      });
+    }
+  }
+   );
 });
 
 app.post('/api/login', (req, res) => {
