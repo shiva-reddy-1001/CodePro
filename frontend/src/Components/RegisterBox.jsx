@@ -23,7 +23,7 @@ const RegisterBox = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    var mailformat = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (email.match(mailformat) && username && password && password2 && password2 === password) {
       const params = JSON.stringify({
         "username": username,
