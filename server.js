@@ -53,19 +53,6 @@ app.post('/api/register', (req, res) => {
       });
     }
   }
-  // bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-  //   const newUser = new user({
-  //     username: req.body.username,
-  //     email: req.body.email,
-  //     password: hash,
-  //   });
-  //   newUser.save(function (err) {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       console.log("success");
-  //     }
-  //   });
    );
 });
 
